@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>loanservice</name>
     <description>loanservice</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -70,6 +71,16 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <to>
+                        <image>devjangir/${project.artifactId}:1</image>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>

@@ -13,16 +13,23 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/account")
-@AllArgsConstructor
 @Validated
 @Tag(name = "Account Service",
         description = "Account Service API")
 public class AccountController {
     private IAccountService accountService;
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    public AccountController(IAccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @GetMapping("/greet")
     public String greeting() {
@@ -46,5 +53,10 @@ public class AccountController {
             description = "Account Details Fetched successfully")
     public ResponseEntity<CustomerDto> getCustomer( @RequestParam String mobileNumber) {
         return ResponseEntity.status(HttpStatus.OK).body(accountService.getCustomer(mobileNumber));
+    }
+
+    @GetMapping("/version")
+    public String getVersion() {
+        return "Account Service Version: " + buildVersion;
     }
 }

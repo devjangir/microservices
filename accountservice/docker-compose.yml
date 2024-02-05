@@ -1,0 +1,11 @@
+services:
+  accountservice:
+    image: "devjangir/accountservice:1"
+    container_name: accountservice
+    ports:
+      - "8080:8080"
+  loanservice:
+    image: "devjangir/loanservice:1"
+    container_name: loanservice
+    ports:
+      - "8090:8090"

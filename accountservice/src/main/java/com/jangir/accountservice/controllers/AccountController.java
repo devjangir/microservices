@@ -1,6 +1,7 @@
 package com.jangir.accountservice.controllers;
 
 import com.jangir.accountservice.constants.AccountConstants;
+import com.jangir.accountservice.dtos.AccountContactInfoDto;
 import com.jangir.accountservice.dtos.AccountDto;
 import com.jangir.accountservice.dtos.CustomerDto;
 import com.jangir.accountservice.dtos.ResponseDto;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,8 +29,10 @@ public class AccountController {
     @Value("${build.version}")
     private String buildVersion;
 
-    public AccountController(IAccountService accountService) {
+    AccountContactInfoDto accountContactInfoDto;
+    public AccountController(IAccountService accountService, AccountContactInfoDto accountContactInfoDto) {
         this.accountService = accountService;
+        this.accountContactInfoDto = accountContactInfoDto;
     }
 
     @GetMapping("/greet")
@@ -58,5 +62,10 @@ public class AccountController {
     @GetMapping("/version")
     public String getVersion() {
         return "Account Service Version: " + buildVersion;
+    }
+
+    @GetMapping("/oncallinfo")
+    public ResponseEntity<AccountContactInfoDto> getOnCallInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(accountContactInfoDto);
     }
 }

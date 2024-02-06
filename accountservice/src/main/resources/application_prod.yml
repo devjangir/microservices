@@ -15,15 +15,10 @@ spring:
       ddl-auto: update
     show-sql: true
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-        - "qa"
-
+    activate:
+      on-profile: "prod"
 build:
-  version: "3.0"
+  version: "1.0"
 
 accounts:
   message: "Hello from account service"

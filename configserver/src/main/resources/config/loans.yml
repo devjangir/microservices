@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Hello from loan service"
+  contactDetails:
+    email: "devjangir@gmail.com"
+    name: "Dev Jangir"
+  onCallSupports:
+    - "8989898989"
+    - "9898989898"
